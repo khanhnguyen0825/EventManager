@@ -1,0 +1,110 @@
+{% extends 'base.html' %} {% block content %}
+
+<div class="container mb-5 mt-4">
+  <div class="row">
+    <div class="col-md-10 offset-md-1">
+      <div class="card page_background">
+        <div class="card-body">
+          <h3 class="text-center text-primary">
+            {% if customer %} Chỉnh sửa thông tin khách hàng: {{ customer.name
+            }} {% else %} Thêm mới khách hàng {% endif %}
+          </h3>
+          <form method="POST" class="container">
+            <div class="form-group">
+              <label for="name">Tên:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="name"
+                name="name"
+                value="{{ customer.name if customer else '' }}"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="address">Địa chỉ:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="address"
+                name="address"
+                value="{{ customer.address if customer else '' }}"
+              />
+            </div>
+            <div class="form-group">
+              <label for="email">Email:</label>
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                name="email"
+                value="{{ customer.email if customer else '' }}"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="phone">Số điện thoại:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="phone"
+                name="phone"
+                value="{{ customer.phone if customer else '' }}"
+              />
+            </div>
+            <h6>Sự kiện của khách hàng</h6>
+            {% if events and events|length > 0 %}
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>STT</th>
+                  <th>Tên sự kiện</th>
+                  <th>Ngày tổ chức</th>
+                  <th>Mô tả</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for event in events %}
+                <tr>
+                  <td>{{ loop.index }}</td>
+                  <td>{{ event.name }}</td>
+                  <td>{{ event.date }}</td>
+                  <td>{{ event.description }}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+            {% else %}
+            <p class="text-muted">
+              Hiện tại khách hàng này chưa có sự kiện nào đăng kí.
+            </p>
+            {% endif %} {% if customer %}
+            <!-- Nút Thêm sự kiện -->
+            <a
+              href="http://localhost:5002/events/add/{{ customer.id }}"
+              class="btn btn-success mt-3 border-button"
+            >
+              Thêm sự kiện mới
+            </a>
+
+            {% endif %}
+            <div class="form-group">
+              <br />
+              <label for="feedback">Ghi chú:</label>
+              <textarea class="form-control" id="feedback" name="feedback">
+{{ customer.feedback if customer else '' }}</textarea
+              >
+            </div>
+
+            <button type="submit" class="btn btn-primary border-button">
+              Lưu
+            </button>
+            <a href="/customers" class="btn btn-secondary border-button">Hủy</a>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

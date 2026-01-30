@@ -1,0 +1,96 @@
+{% extends "base.html" %} {% block title %}Danh sách địa điểm{% endblock %} {%
+block content %}
+<div class="container mt-4 p-4 page_background">
+  <h3 class="text-center text-warning">Danh sách địa điểm hiện có</h3>
+
+  <div class="row">
+    {% for venue in venues %}
+    <div class="col-md-4 mb-4">
+      <div class="card shadow">
+        {% if venue.image_url %}
+        <img
+          src="{{ venue.image_url }}"
+          class="card-img-top"
+          alt="{{ venue.name }}"
+          style="height: 200px; object-fit: cover"
+        />
+        {% endif %}
+        <div class="card-body">
+          <h5 class="card-title">{{ venue.name }}</h5>
+          <p class="card-text">
+            <i class="fas fa-building mr-2"></i> {{ venue.type }}<br />
+            <i class="fas fa-users mr-2"></i> {{ venue.capacity }} người<br />
+            <i class="fas fa-money-bill-wave mr-2"></i> {{
+            "{:,.0f}".format(venue.price_per_hour) }} VNĐ/giờ
+          </p>
+          <div>
+            <a
+              href="{{ url_for('place.edit_venue', id=venue.id) }}"
+              class="btn btn-primary btn-custom border-button"
+            >
+              <i class="fas fa-edit"></i> Sửa
+            </a>
+            <button
+              type="button"
+              class="btn btn-danger btn-custom border-button ml-2"
+              data-toggle="modal"
+              data-target="#deleteModal{{ venue.id }}"
+            >
+              <i class="fas fa-trash"></i> Xóa
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Delete Modal -->
+    <div class="modal fade" id="deleteModal{{ venue.id }}" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Xác nhận xóa</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+          <div class="modal-body">
+            Bạn có chắc chắn muốn xóa địa điểm "{{ venue.name }}"?
+          </div>
+          <div class="modal-footer">
+            <form
+              action="{{ url_for('place.delete_venue_web', id=venue.id) }}"
+              method="POST"
+            >
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Hủy
+              </button>
+              <button type="submit" class="btn btn-danger">Xóa</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  <div class="d-flex justify-content-between mt-4">
+    <a
+      href="{{ url_for('place.new_venue') }}"
+      class="btn btn-primary btn-custom border-button"
+    >
+      <i class="fas fa-plus"></i> &nbsp;Thêm địa điểm mới
+    </a>
+    <a
+      href="http://localhost:5001/customers/dashboard?admin=true"
+      class="btn btn-secondary border-button"
+    >
+      <i class="fa fa-arrow-left"></i> &nbsp;Quay lại trang quản lý
+    </a>
+  </div>
+  {% endblock %}
+</div>

@@ -1,0 +1,149 @@
+{% extends "base.html" %} {% block title %}Thêm địa điểm mới{% endblock %} {%
+block content %}
+<div class="page_background p-4">
+  <h3 class="mb-4">Thêm địa điểm mới</h3>
+
+  <form method="POST" class="needs-validation" novalidate>
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <label for="name" class="form-label">
+          <i class="fas fa-building"></i> Tên địa điểm
+        </label>
+        <input
+          type="text"
+          class="form-control"
+          id="name"
+          name="name"
+          required
+        />
+      </div>
+
+      <div class="col-md-6 mb-3">
+        <label for="type" class="form-label">
+          <i class="fas fa-tag"></i> Loại
+        </label>
+        <select
+          class="form-select custom-select"
+          id="type"
+          name="type"
+          required
+        >
+          <option value="">Chọn loại địa điểm</option>
+          <option value="Hội trường">Hội trường</option>
+          <option value="Rạp">Rạp</option>
+          <option value="Sân khấu ngoài trời">Sân khấu ngoài trời</option>
+          <option value="Nhà hát">Nhà hát</option>
+        </select>
+      </div>
+
+      <div class="col-md-6 mb-3">
+        <label for="capacity" class="form-label">
+          <i class="fas fa-users"></i> Sức chứa (người)
+        </label>
+        <input
+          type="number"
+          class="form-control"
+          id="capacity"
+          name="capacity"
+          required
+        />
+      </div>
+
+      <div class="col-md-6 mb-3">
+        <label for="price_per_hour" class="form-label">
+          <i class="fas fa-money-bill-wave"></i> Giá/giờ (VNĐ)
+        </label>
+        <input
+          type="number"
+          class="form-control"
+          id="price_per_hour"
+          name="price_per_hour"
+          required
+        />
+      </div>
+
+      <div class="col-12 mb-3">
+        <label for="address" class="form-label">
+          <i class="fas fa-map-marker-alt"></i> Địa chỉ
+        </label>
+        <input
+          type="text"
+          class="form-control"
+          id="address"
+          name="address"
+          required
+        />
+      </div>
+
+      <div class="col-12 mb-3">
+        <label for="description" class="form-label">
+          <i class="fas fa-info-circle"></i> Mô tả
+        </label>
+        <textarea
+          class="form-control"
+          id="description"
+          name="description"
+          rows="3"
+        ></textarea>
+      </div>
+
+      <div class="col-12 mb-3">
+        <label for="facilities" class="form-label">
+          <i class="fas fa-tools"></i> Tiện ích
+        </label>
+        <textarea
+          class="form-control"
+          id="facilities"
+          name="facilities"
+          placeholder="Ví dụ: Máy chiếu, Âm thanh, Điều hòa,..."
+        ></textarea>
+      </div>
+
+      <div class="col-12 mb-3">
+        <label for="image_url" class="form-label">
+          <i class="fas fa-image"></i> URL hình ảnh
+        </label>
+        <input
+          type="url"
+          class="form-control"
+          id="image_url"
+          name="image_url"
+        />
+      </div>
+    </div>
+
+    <div class="mt-4">
+      <button type="submit" class="btn btn-primary btn-custom">
+        <i class="fas fa-save"></i> Thêm địa điểm
+      </button>
+      <a
+        href="{{ url_for('place.index') }}"
+        class="btn btn-secondary btn-custom ms-2"
+      >
+        <i class="fas fa-times"></i> Hủy
+      </a>
+    </div>
+  </form>
+</div>
+{% endblock %} {% block scripts %}
+<script>
+  // Form validation
+  (function () {
+    "use strict";
+    var forms = document.querySelectorAll(".needs-validation");
+    Array.prototype.slice.call(forms).forEach(function (form) {
+      form.addEventListener(
+        "submit",
+        function (event) {
+          if (!form.checkValidity()) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+          form.classList.add("was-validated");
+        },
+        false
+      );
+    });
+  })();
+</script>
+{% endblock %}

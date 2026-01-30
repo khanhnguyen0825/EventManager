@@ -1,0 +1,70 @@
+{% extends 'base.html' %} {% block content %}
+<div class="container mt-4 p-4 page_background">
+  <div class="text-center">
+    <h2>CHÀO MỪNG ĐẾN VỚI TRANG QUẢN LÝ</h2>
+
+    <div class="container">
+      <div class="row p-5">
+        <div class="col-md-4">
+          <a href="/customers" class="text-decoration-none">
+            <div class="card dashboard_card_border card-hover">
+              <div class="card-body text-center">
+                <i class="fas fa-user fa-3x text-primary"></i><br />
+                <h4 class="text-primary">Khách hàng</h4>
+                <div></div>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <div class="col-md-4">
+          <a href="http://localhost:5002/events" class="text-decoration-none">
+            <div class="card dashboard_card_border card-hover">
+              <div class="card-body text-center">
+                <i class="fas fa-calendar fa-3x text-danger"></i><br />
+                <h4 class="text-danger">Sự kiện</h4>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <div class="col-md-4">
+          <a href="http://localhost:5005/place" class="text-decoration-none">
+            <div class="card dashboard_card_border card-hover">
+              <div class="card-body text-center">
+                <i class="fas fa-building fa-3x text-warning"></i><br />
+                <h4 class="text-warning">Địa điểm</h4>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <div class="col-md-6 mt-5">
+          <a href="/supplier" class="text-decoration-none">
+            <div class="card dashboard_card_border card-hover">
+              <div class="card-body text-center">
+                <i class="fas fa-box-open fa-3x text-success"></i><br />
+                <h4 class="text-success">Nhà cung cấp</h4>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <div class="col-md-6 mt-5">
+          <a
+            href="http://localhost:5003/reports/list"
+            class="text-decoration-none"
+          >
+            <div class="card dashboard_card_border card-hover">
+              <div class="card-body text-center">
+                <i class="fas fa-flag fa-3x text-secondary"></i><br />
+                <h4 class="text-secondary">Báo cáo và đánh giá</h4>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kết quả tra cứu vé đã đặt</title>
+    <link rel="stylesheet" href="/static/style.css" />
+  </head>
+  <body>
+    <section class="contact" id="lookup_result">
+      <div class="container mt-5">
+        <h1 class="heading">Kết quả tra cứu vé đã đặt</h1>
+
+        <div
+          class="mt-5"
+          style="
+            background-color: #ffffff;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+            font-size: 1.5rem;
+            line-height: 2;
+          "
+        >
+          <h2 style="margin-bottom: 5px; color: #333; font-size: 1.8rem">
+            Email tra cứu: <strong>{{ email_checked }}</strong>
+          </h2>
+
+          {% if tickets %} {% for ticket in tickets %}
+          <div
+            class="mb-4"
+            style="
+              background-color: #f9f9f9;
+              border-left: 6px solid var(--main-color);
+              border-radius: 10px;
+              padding: 15px;
+              margin-bottom: 20px;
+            "
+          >
+            <h3 style="color: #2e7d32; font-size: 1.6rem">
+              Vé {{ loop.index }} - Mã vé:
+              <strong>{{ ticket.ticket_code }}</strong>
+            </h3>
+            <p><strong>Sự kiện:</strong> {{ ticket.event_name }}</p>
+            <p><strong>Ngày tổ chức:</strong> {{ ticket.event_date }}</p>
+            <p><strong>Thời gian đặt vé:</strong> {{ ticket.booked_at }}</p>
+          </div>
+          {% endfor %} {% else %}
+          <p style="color: #e53935; font-size: 1.8rem; margin-top: 15px">
+            Không tìm thấy vé nào ứng với email:
+            <strong>{{ email_checked }}</strong>
+          </p>
+          {% endif %}
+        </div>
+
+        <div class="mt-4 text-center">
+          <a href="/register" class="btn"> &larr; Quay lại trang chủ </a>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

@@ -1,0 +1,54 @@
+{% extends 'base.html' %} {% block content %}
+<div class="container mt-4 p-4 page_background">
+  <h3 class="text-center text-primary">Xem và chỉnh sửa báo cáo</h3>
+
+  <div class="card mt-3 p-4">
+    <h5><strong>Sự kiện:</strong> {{ event['name'] }}</h5>
+    <p><strong>Khách hàng:</strong> {{ event['customer_name'] }}</p>
+    <p><strong>Ngày tổ chức:</strong> {{ event['date'] }}</p>
+    <p>
+      <strong>Loại sự kiện:</strong>
+      {{ event['description'].split('\n')[0] if event['description'] else 'Không
+      rõ' }}
+    </p>
+  </div>
+
+  <form method="POST" class="mt-4">
+    <div class="form-group">
+      <label for="summary">Tóm tắt sự kiện:</label>
+      <textarea
+        id="summary"
+        name="summary"
+        class="form-control"
+        rows="5"
+        required
+      >
+{{ report.summary }}</textarea
+      >
+    </div>
+
+    <div class="form-group mt-3">
+      <label for="feedback">Đánh giá:</label>
+      <textarea
+        id="feedback"
+        name="feedback"
+        class="form-control"
+        rows="5"
+        required
+      >
+{{ report.feedback }}</textarea
+      >
+    </div>
+
+    <button type="submit" class="btn btn-success mt-4 border-button">
+      <i class="fa fa-arrow-up"></i> &nbsp;Cập nhật báo cáo
+    </button>
+    <a
+      href="{{ url_for('report.report_list') }}"
+      class="btn btn-secondary mt-4 ms-2 border-button"
+    >
+      <i class="fa fa-arrow-left"></i> &nbsp;Quay lại danh sách báo cáo
+    </a>
+  </form>
+</div>
+{% endblock %}

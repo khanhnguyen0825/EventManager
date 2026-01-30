@@ -1,0 +1,183 @@
+{% extends 'base.html' %} {% block content %}
+<div class="container mt-4 p-4 page_background">
+  <h3 class="text-center text-primary">
+    Thêm sự kiện cho khách hàng {{ customer.name }}
+  </h3>
+  <form
+    method="POST"
+    action="{{ url_for('event.add_event', customer_id=customer.id) }}"
+    class="container"
+    style="max-width: 600px"
+  >
+    <div class="form-group">
+      <label for="event_name">
+        Tên sự kiện
+      </label>
+      <input
+        type="text"
+        class="form-control"
+        id="event_name"
+        name="event_name"
+        required
+        placeholder="Nhập tên sự kiện..."
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="event_type">
+         Loại hình sự kiện
+      </label>
+      <select class="form-control" id="event_type" name="event_type">
+        <option value="Sự kiện doanh nghiệp">
+          Sự kiện doanh nghiệp (Corporate events)
+        </option>
+        <option value="Sự kiện họp báo, truyền thông báo chí">
+          Sự kiện họp báo, truyền thông báo chí (PR)
+        </option>
+        <option value="Sự kiện truyền thông thương hiệu">
+          Sự kiện truyền thông thương hiệu (Activation Event)
+        </option>
+        <option value="Sự kiện kinh doanh">
+          Sự kiện kinh doanh (Business events)
+        </option>
+        <option value="Sự kiện thể thao">
+          Sự kiện thể thao (Sports events)
+        </option>
+        <option value="Sự kiện tiếp thị, quảng bá sản phẩm">
+          Sự kiện tiếp thị, quảng bá sản phẩm (Marketing events)
+        </option>
+        <option value="Sự kiện mua sắm">Sự kiện mua sắm (Shopper Event)</option>
+        <option value="Sự kiện từ thiện">
+          Sự kiện từ thiện (Fundraising events)
+        </option>
+        <option value="Sự kiện lễ hội">Sự kiện lễ hội (Festival events)</option>
+        <option value="Sự kiện hòa nhạc">
+          Sự kiện hòa nhạc (Concerts/live performances)
+        </option>
+        <option value="Sự kiện gặp mặt">Sự kiện gặp mặt (Meetings)</option>
+        <option value="Sự kiện chia sẻ kiến thức">
+          Sự kiện chia sẻ kiến thức (Workshops)
+        </option>
+        <option value="Sự kiện cá nhân">Sự kiện cá nhân (Personal)</option>
+        <option value="Khác">Khác</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="guest_count">Số khách mời (Dự kiến)</label>
+      <input
+        type="text"
+        class="form-control"
+        id="guest_count"
+        name="guest_count"
+        required
+      />
+    </div>
+    <div class="form-group">
+      <label for="total_tickets">Số lượng vé (chỗ ngồi)</label>
+      <input
+        type="number"
+        class="form-control"
+        id="total_tickets"
+        name="total_tickets"
+        min="1"
+        required
+      />
+    </div>
+    <div class="form-group">
+      <label for="event_date">Ngày tổ chức</label>
+      <input
+        type="date"
+        class="form-control"
+        id="event_date"
+        name="event_date"
+        required
+      />
+    </div>
+    <div class="form-group">
+      <label for="venue_id">
+         Địa điểm tổ chức
+      </label>
+      <select class="form-control" id="venue_id" name="venue_id" required>
+        <option value="">Chọn địa điểm tổ chức</option>
+        {% for venue in venues %}
+        <option value="{{ venue.id }}" data-capacity="{{ venue.capacity }}">
+          {{ venue.name }} (Sức chứa: {{ venue.capacity }} người)
+        </option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="special_requests">
+        Yêu cầu đặc biệt
+      </label>
+      <textarea
+        class="form-control"
+        id="special_requests"
+        name="special_requests"
+        rows="3"
+        placeholder="Nhập các yêu cầu đặc biệt cho sự kiện (nếu có)"
+      ></textarea>
+    </div>
+
+    <div class="mt-4">
+      <button type="submit" class="btn btn-primary border-button">
+        <i class="fas fa-plus"></i> Thêm sự kiện
+      </button>
+    <a
+      href="http://localhost:5001/customers/"
+      class="btn btn-secondary border-button"
+      >Hủy</a
+    >
+  </form>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.getElementById('venue_id').addEventListener('change', function() {
+    const selectedOption = this.options[this.selectedIndex];
+    const venueCapacity = selectedOption.getAttribute('data-capacity');
+    const guestCount = document.getElementById('guest_count');
+    const totalTickets = document.getElementById('total_tickets');
+    
+    if (venueCapacity) {
+        guestCount.setAttribute('max', venueCapacity);
+        totalTickets.setAttribute('max', venueCapacity);
+        
+        // Thêm thông báo nếu số lượng hiện tại vượt quá sức chứa
+        if (parseInt(guestCount.value) > parseInt(venueCapacity)) {
+            alert(`Số lượng khách không được vượt quá sức chứa của địa điểm (${venueCapacity} người)`);
+            guestCount.value = venueCapacity;
+        }
+        if (parseInt(totalTickets.value) > parseInt(venueCapacity)) {
+            alert(`Số lượng vé không được vượt quá sức chứa của địa điểm (${venueCapacity} người)`);
+            totalTickets.value = venueCapacity;
+        }
+    }
+});
+
+// Kiểm tra khi người dùng nhập số lượng
+document.getElementById('guest_count').addEventListener('input', function() {
+    const venue = document.getElementById('venue_id');
+    const selectedOption = venue.options[venue.selectedIndex];
+    const venueCapacity = selectedOption.getAttribute('data-capacity');
+    
+    if (venueCapacity && parseInt(this.value) > parseInt(venueCapacity)) {
+        alert(`Số lượng khách không được vượt quá sức chứa của địa điểm (${venueCapacity} người)`);
+        this.value = venueCapacity;
+    }
+});
+
+document.getElementById('total_tickets').addEventListener('input', function() {
+    const venue = document.getElementById('venue_id');
+    const selectedOption = venue.options[venue.selectedIndex];
+    const venueCapacity = selectedOption.getAttribute('data-capacity');
+    
+    if (venueCapacity && parseInt(this.value) > parseInt(venueCapacity)) {
+        alert(`Số lượng vé không được vượt quá sức chứa của địa điểm (${venueCapacity} người)`);
+        this.value = venueCapacity;
+    }
+});
+</script>
+{% endblock %}

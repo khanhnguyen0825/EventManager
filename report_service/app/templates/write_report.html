@@ -1,0 +1,52 @@
+{% extends 'base.html' %} {% block content %}
+<div class="container mt-4 p-4 page_background">
+  <h3 class="text-center text-success">Đánh dấu hoàn thành và viết báo cáo</h3>
+
+  <div class="card mt-3 p-4">
+    <h5><strong>Tên sự kiện:</strong> {{ event['name'] }}</h5>
+    <p><strong>Khách hàng:</strong> {{ event.customer_name }}</p>
+    <p><strong>Ngày tổ chức:</strong> {{ event['date'] }}</p>
+    <p>
+      <strong>Mô tả:</strong><br />
+      {{ event['description'].replace('\n', '<br />') | safe if
+      event['description'] else 'Không có mô tả.' }}
+    </p>
+  </div>
+
+  <form method="POST" class="mt-4">
+    <div class="form-group">
+      <label for="summary">Tóm tắt sự kiện:</label>
+      <textarea
+        id="summary"
+        name="summary"
+        class="form-control"
+        rows="5"
+        placeholder="Nhập tóm tắt kết quả thực hiện sự kiện"
+        required
+      ></textarea>
+    </div>
+
+    <div class="form-group mt-3">
+      <label for="feedback">Đánh giá & mức độ thành công:</label>
+      <textarea
+        id="feedback"
+        name="feedback"
+        class="form-control"
+        rows="5"
+        placeholder="Nhận xét về kết quả sự kiện, điểm mạnh/yếu, khách hàng phản hồi..."
+        required
+      ></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary mt-4 border-button">
+      Lưu báo cáo & quay lại danh sách sự kiện
+    </button>
+    <a
+      href="http://localhost:5002/events/"
+      class="btn btn-secondary mt-4 ms-2 border-button"
+    >
+      <i class="fa fa-arrow-left"></i> &nbsp;Quay lại
+    </a>
+  </form>
+</div>
+{% endblock %}

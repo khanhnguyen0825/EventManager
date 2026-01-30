@@ -1,0 +1,468 @@
+<!-- register_event.html (landing page mới) -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/swiper/swiper-bundle.min.css"
+    />
+    <!-- font awesome cdn link  -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+    <!-- custom css link -->
+    <link rel="stylesheet" href="/static/style.css" />
+  </head>
+  <body>
+    <!-- header section starts -->
+
+    <header class="header">
+      <a data-aos="zoom-in-left" data-aos-delay="150" href="#" class="logo">
+        <i class="fas fa-ticket-alt"></i> SUPREM:EVENT
+      </a>
+      <nav class="navbar">
+        <a data-aos="zoom-in-left" data-aos-delay="300" href="#home">Trang chủ</a>
+        <a data-aos="zoom-in-left" data-aos-delay="450" href="#events">Sự kiện</a>
+        <a data-aos="zoom-in-left" data-aos-delay="600" href="#howto">Hướng dẫn đặt vé</a>
+        <a data-aos="zoom-in-left" data-aos-delay="750" href="#lookup_event">Tra cứu vé</a>
+        <a data-aos="zoom-in-left" data-aos-delay="900" href="#contact_banner">Liên hệ</a>
+      </nav>
+      <div class="icons">
+        <div data-aos="zoom-in-left" data-aos-delay="1350" class="fas fa-moon" id="theme-btn"></div>
+        <div data-aos="zoom-in-left" data-aos-delay="1500" class="fas fa-bars" id="menu"></div>
+      </div>
+    </header>
+
+    <!-- end -->
+
+    <!-- home -->
+
+    <section class="home" id="home" style="background: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1500&q=80') center/cover no-repeat; display: flex; align-items: center; justify-content: center;">
+      <div class="content" data-aos="fade-down" style="background: rgba(0,0,0,0.5); padding: 40px 60px; border-radius: 20px; text-align: center; color: #fff;">
+        <h2 style="font-size: 2.8rem; font-weight: bold; margin-bottom: 18px;">ĐẶT VÉ SỰ KIỆN ONLINE DỄ DÀNG!</h2>
+        <p style="font-size: 2rem; margin-bottom: 25px;">Khám phá, chọn sự kiện yêu thích và đặt vé chỉ với vài bước đơn giản!</p>
+        <a href="#events" class="btn" style="font-size: 1.7rem; padding: 12px 36px;">Xem sự kiện nổi bật</a>
+      </div>
+    </section>
+
+    <!-- end -->
+
+    <!-- Danh sách sự kiện nổi bật -->
+    <section class="events" id="events">
+      <h1 class="heading" style="text-align:center; font-size:2.5rem; margin-bottom: 2.5rem;">SỰ KIỆN NỔI BẬT</h1>
+      <div class="box-container" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 2.5rem;">
+        {% for event in events %}
+        <div class="box" data-aos="fade-up" style="width: 350px; min-height: 270px; background: #fff; border-radius: 18px; box-shadow: 0 4px 24px rgba(0,0,0,0.08); padding: 32px 28px; margin-bottom: 20px; text-align: left; display: flex; flex-direction: column; justify-content: space-between;">
+          <h2 style="font-size: 2.1rem; font-weight: bold; margin-bottom: 18px; color: #2d2d6e;">{{ event.name }}</h2>
+          <p style="font-size: 1.3rem; margin-bottom: 12px;"><i class="fas fa-calendar-alt"></i> {{ event.date }}</p>
+          <div style="font-size: 1.5rem; margin-bottom: 16px;">
+            {% for line in event.description.split('\n') %}
+              <div>{{ line }}</div>
+            {% endfor %}
+          </div>
+          <span class="badge bg-info text-dark" style="font-size:1.3rem;">Tổng vé: {{ event.total_tickets }}</span>
+          <span class="badge bg-success text-light" style="font-size:1.3rem;">Còn lại: {{ event.total_tickets - event.booked_count }}</span>
+          <a href="#contact" class="btn" style="padding: 13px 36px; border-radius: 30px; background: #e53935; color: #fff; border: none;">Đặt vé</a>
+        </div>
+        {% endfor %}
+      </div>
+    </section>
+
+    <!-- Hướng dẫn đặt vé -->
+    <section class="howto" id="howto">
+      <h1 class="heading">HƯỚNG DẪN ĐẶT VÉ</h1>
+      <div class="box-container">
+        <div class="box" data-aos="zoom-in-up" data-aos-delay="150">
+          <h3 class="title">Bước 1</h3>
+          <ul><li>Chọn sự kiện bạn muốn tham gia ở mục <b>Sự kiện nổi bật</b>.</li></ul>
+        </div>
+        <div class="box" data-aos="zoom-in-up" data-aos-delay="300">
+          <h3 class="title">Bước 2</h3>
+          <ul><li>Điền thông tin cá nhân và số lượng vé muốn đặt.</li></ul>
+        </div>
+        <div class="box" data-aos="zoom-in-up" data-aos-delay="450">
+          <h3 class="title">Bước 3</h3>
+          <ul><li>Nhấn <b>Đặt vé</b> và kiểm tra email để nhận mã vé điện tử.</li></ul>
+        </div>
+      </div>
+    </section>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- service end-->
+
+    <!-- plan section starts  -->
+
+    <section class="plan" id="plan">
+      <h1 class="heading">Lợi ích chúng tôi mang lại</h1>
+
+      <div class="box-container">
+        <!-- Lợi ích cho người đăng ký sự kiện -->
+        <div class="box" data-aos="zoom-in-up" data-aos-delay="150">
+          <h3 class="title">Dịch Vụ Trọn Gói</h3>
+          <ul>
+            <li>
+              <br />Chúng tôi cung cấp giải pháp toàn diện từ
+              lập kế hoạch, thiết kế đến triển khai sự kiện. Bạn chỉ cần đưa ra ý tưởng,
+              chúng tôi sẽ hiện thực hóa mọi mong muốn của bạn.
+            </li>
+          </ul>
+        </div>
+
+        <div class="box" data-aos="zoom-in-up" data-aos-delay="150">
+          <h3 class="title">Đặt Vé Dễ Dàng</h3>
+          <ul>
+            <li>
+              <br />Hệ thống đặt vé trực tuyến 24/7,
+              thanh toán an toàn, nhận vé điện tử tức thì. Không cần xếp hàng,
+              không lo hết vé với hệ thống thông báo real-time.
+            </li>
+          </ul>
+        </div>
+
+        <div class="box" data-aos="zoom-in-up" data-aos-delay="150">
+          <h3 class="title">Trải Nghiệm Độc Đáo</h3>
+          <ul>
+            <li>
+              <br />Mỗi sự kiện đều được thiết kế độc đáo,
+              mang đến trải nghiệm khó quên cho người tổ chức và người tham dự.
+              Công nghệ hiện đại kết hợp với ý tưởng sáng tạo.
+            </li>
+          </ul>
+        </div>
+
+        <div class="box" data-aos="zoom-in-up" data-aos-delay="150">
+          <h3 class="title">Hỗ Trợ 24/7</h3>
+          <ul>
+            <li>
+              <br />Đội ngũ hỗ trợ chuyên nghiệp luôn sẵn sàng giải đáp mọi thắc mắc
+              của cả người tổ chức và người tham dự. Hỗ trợ trước, trong và sau
+              sự kiện qua đa dạng kênh liên lạc.
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- plan section ends -->
+
+    <!-- gallery=--->
+
+    <section class="gallery" id="gallery">
+      <h1 class="heading">Dự án tiêu biểu</h1>
+
+      <div class="swiper gallery-slider" data-aos="fade-up">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <img src="https://i.ibb.co/p3zCZzV/gallery1.jpg" alt="" />
+          </div>
+          <div class="swiper-slide">
+            <img src="https://i.ibb.co/sy2qrrG/gallery2.jpg" alt="" />
+          </div>
+          <div class="swiper-slide">
+            <img src="https://i.ibb.co/gFDpC3Q/gallery3.jpg" alt="" />
+          </div>
+          <div class="swiper-slide">
+            <img src="https://i.ibb.co/sWFCk9n/gallery4.jpg" alt="" />
+          </div>
+          <div class="swiper-slide">
+            <img src="https://i.ibb.co/17kVQXd/gallery5.jpg" alt="" />
+          </div>
+          <div class="swiper-slide">
+            <img src="https://i.ibb.co/x2hCQN3/gallery6.jpg" alt="" />
+          </div>
+          <div class="swiper-slide">
+            <img src="https://i.ibb.co/C2ND5HH/gallery7.jpg" alt="" />
+          </div>
+          <div class="swiper-slide">
+            <img src="https://i.ibb.co/VHs28B3/gallery-8.jpg" alt="" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- end -->
+
+    <!-- review section starts  -->
+
+    <section class="review" id="review">
+      <h1 class="heading">Khách hàng nói gì về chúng tôi</h1>
+
+      <div class="swiper review-slider" data-aos="zoom-in">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide slide">
+            <img src="https://i.ibb.co/cczgfx8/human2.jpg" alt="" />
+            <p>
+              Khi tôi tìm kiếm một đối tác tổ chức sự kiện, tôi muốn một điều gì
+              đó thật đặc biệt, không giống những gì tôi đã thấy trước đây.
+              SUPREM:EVENT đã mang đến những ý tưởng sáng tạo và đột phá, khiến
+              sự kiện của tôi trở thành một trải nghiệm tuyệt vời. Họ không chỉ
+              là một agency, mà thực sự là một người bạn đồng hành, luôn hỗ trợ
+              tôi trong mọi bước đi. Tôi rất hài lòng với sự hợp tác này.
+            </p>
+            <div class="stars">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star-half-alt"></i>
+            </div>
+            <h3>Anh Hồ Thống Khổ - Marketing Manager - 7Sins Group</h3>
+          </div>
+
+          <div class="swiper-slide slide">
+            <img src="https://i.ibb.co/b1rQB0H/human1jpg.jpg" alt="" />
+            <p>
+              Khi tìm kiếm Agency, tôi kỳ vọng rằng sẽ nhận được bản đề xuất ấn
+              tượng - một sự kiện chưa từng có và giúp mình tạo nên dấu ấn đặc
+              biệt với ngành hàng mình đang phát triển. SUPREM:EVENT đã giúp tôi
+              thực hiện hóa và khiến tôi rất bất ngờ với những ý tưởng mới và
+              trẻ trung. Đối với tôi SUPREM:EVENT không chỉ đơn giản là đơn vị
+              agency mà giống như một người bạn có thể hỗ trợ và giúp đỡ tháo gỡ
+              những khó khăn. Tôi rất hài lòng khi làm việc cùng SUPREM:EVENT.
+            </p>
+            <div class="stars">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star-half-alt"></i>
+            </div>
+            <h3>
+              Chị Lò Thị Mệt - Quản lý thương hiệu và Marketing - Ngân hàng
+              TiredBank
+            </h3>
+          </div>
+
+          <div class="swiper-slide slide">
+            <img src="https://i.ibb.co/vsPW3jk/human4.jpg" alt="" />
+            <p>
+              For the ultimate success of any event it is vital to have a
+              dedicated events team. The SUPREM:EVENT team were dedicated and
+              delivered in EVERY way and no request (and there were many) was
+              left hanging - thank you all. From my perspective, it was early
+              starts and late finishes, and you were all there to support and
+              contribute to the success of our event as long as it was required.
+              The patience of SUPREM:EVENT Event with the many logistic changes
+              and last minute requests was truly appreciated. THANK YOU ALL!
+            </p>
+            <div class="stars">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star-half-alt"></i>
+            </div>
+            <h3>Mr Hurtinga Ultimatimue - Manager - Problums Tech</h3>
+          </div>
+
+          <div class="swiper-slide slide">
+            <img src="https://i.ibb.co/y0r1X5P/human3.jpg" alt="" />
+            <p>
+              Tôi đã hợp tác với nhiều agency trước đây, nhưng SUPREM:EVENT thực
+              sự làm tôi ấn tượng với những ý tưởng mới mẻ và cách thức làm việc
+              chuyên nghiệp. Mỗi sự kiện họ tổ chức đều mang một dấu ấn riêng
+              biệt, giúp tôi nổi bật trong ngành. SUPREM:EVENT không chỉ là đối
+              tác, mà còn là người bạn giúp tôi vượt qua mọi thách thức. Mỗi lần
+              làm việc với họ là một lần tôi cảm nhận được sự tận tâm và sáng
+              tạo không ngừng
+            </p>
+            <div class="stars">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star-half-alt"></i>
+            </div>
+            <h3>Anh Phiêu Linh Sích - Giám đốc kinh doanh - Tật Group</h3>
+          </div>
+        </div>
+
+        <div class="swiper-pagination"></div>
+      </div>
+    </section>
+
+    <!-- review section ends -->
+
+    <!-- banner liên hệ -->
+    <section class="contact_banner" id="contact_banner">
+      <h1 class="heading">Liên hệ ngay với chúng tôi</h1>
+
+      <div class="row">
+        <div class="content" data-aos="fade-up" data-aos-delay="150">
+          <h1>TƯ VẤN MIỄN PHÍ</h1>
+          <h2>034.740.7333</h2>
+          <h2>infor@suprem:event.vn</h2>
+        </div>
+        <div class="image" data-aos="fade-down" data-aos-delay="300">
+          <img src="https://i.ibb.co/p6q7VGv/team.jpg" alt="" />
+        </div>
+      </div>
+    </section>
+
+    <!-- BANNER LIÊN HỆ END  -->
+
+    <!-- section tra cứu sự kiện -->
+    <section class="contact" id="lookup_event">
+      <h1 class="heading">
+        Bạn đã đặt vé? Tra cứu vé ngay
+      </h1>
+      <form method="POST" action="{{ url_for('public.check_events') }}">
+        <div class="inputBox">
+          <input
+            type="email"
+            name="lookup_email"
+            placeholder="Nhập email của bạn để tra cứu vé đã đặt"
+            class="form-control"
+            style="width: 100%"
+            required
+          />
+        </div>
+        <button type="submit" class="btn">Kiểm tra vé</button>
+      </form>
+    </section>
+
+    <!-- contact section starts  -->
+
+    <section class="contact" id="contact">
+      <h1 class="heading">Bạn muốn tham gia sự kiện? Đặt vé ngay</h1>
+      <form method="POST" action="{{ url_for('public.book_ticket_public') }}">
+        <div class="inputBox">
+          <input
+            type="text"
+            placeholder="Tên"
+            data-aos="fade-up"
+            id="name"
+            name="name"
+            required
+          />
+          <input
+            type="email"
+            placeholder="Email"
+            data-aos="fade-up"
+            id="email"
+            name="email"
+            required
+          />
+        </div>
+        <div class="inputBox">
+          <input
+            type="text"
+            placeholder="Số điện thoại"
+            data-aos="fade-up"
+            id="phone"
+            name="phone"
+            required
+          />
+          <select id="event_id" name="event_id" data-aos="fade-up" required>
+            <option value="">Chọn sự kiện</option>
+            {% for event in events %}
+            <option value="{{ event.id }}">
+              {{ event.name }} ({{ event.date }}) - Vé còn lại: {{
+              event.total_tickets - event.booked_count if event.total_tickets is
+              defined and event.booked_count is defined else '?' }}
+            </option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="inputBox">
+            <input
+              type="number"
+              placeholder="Số lượng vé muốn đặt (tối đa 4 vé/email/sự kiện)"
+              data-aos="fade-up"
+              id="ticket_quantity"
+              name="ticket_quantity"
+              min="1"
+              max="4"
+              required
+            />
+            <div style="color:#e53935; font-size:2rem; margin-top:4px;" data-aos="fade-up">* Mỗi email chỉ được đặt tối đa 4 vé cho mỗi sự kiện. Nếu cần đặt thêm, vui lòng liên hệ hotline.</div>
+        </div>
+        <button type="submit" class="btn">Đặt vé</button>
+        {% with messages = get_flashed_messages(with_categories=true) %} {% if
+        messages %}
+        <div class="booking_success" id="flash-message">
+          {% for category, message in messages %}
+          <p>{{ message }}</p>
+          {% endfor %}
+        </div>
+        {% endif %} {% endwith %}
+      </form>
+    </section>
+
+    <!-- footer -->
+    <footer>
+      <section class="footer">
+        <div class="box-container">
+          <div class="box" data-aos="fade-up">
+            <h3><i class="fas fa-user"></i> SUPREM:EVENT</h3>
+            <p>Để mọi khoảnh khắc đều trở nên quý giá</p>
+          </div>
+
+          <div class="box" data-aos="fade-up">
+            <h3>Dịch vụ</h3>
+            <a href="#"
+              ><i class="fas fa-chevron-right"></i> Tư vấn và lập kế hoạch sự
+              kiện</a
+            >
+            <a href="#"
+              ><i class="fas fa-chevron-right"></i> Tổ chức và triển khai sự
+              kiện</a
+            >
+            <a href="#"
+              ><i class="fas fa-chevron-right"></i> Quản lý và hỗ trợ sau sự
+              kiện</a
+            >
+          </div>
+
+          <div class="box" data-aos="fade-up">
+            <h3>Liên hệ</h3>
+            <a href="#"><i class="fas fa-phone"></i> 0347407333</a>
+            <a href="#"><i class="fas fa-phone"></i> 555-555-5555</a>
+            <a href="#"><i class="fas fa-envelope"></i>infor@suprem:event.vn</a>
+            <a href="#"><i class="fas fa-map"></i> Hà Nội</a>
+          </div>
+
+          <div class="box" data-aos="fade-up">
+            <h3>Follow Us</h3>
+            <a href="#"> <i class="fab fa-facebook-f"></i> Facebook </a>
+            <a href="#"> <i class="fab fa-twitter"></i> Twitter </a>
+            <a href="#"> <i class="fab fa-instagram"></i> Instagram </a>
+            <a href="#"> <i class="fab fa-pinterest"></i> Pinterest </a>
+          </div>
+        </div>
+      </section>
+    </footer>
+    <script>
+      // Sau khi trang được tải xong, tự động cuộn xuống thông báo flash
+      window.onload = function () {
+        var flashMessage = document.getElementById("flash-message");
+        if (flashMessage) {
+          flashMessage.scrollIntoView({ behavior: "smooth" });
+        }
+      };
+    </script>
+    <!-- end -->
+    <script>
+      // Sau khi trang được tải xong, tự động cuộn xuống thông báo flash
+      window.onload = function () {
+        var flashMessage = document.getElementById("flash-message");
+        if (flashMessage) {
+          flashMessage.scrollIntoView({ behavior: "smooth" });
+        }
+      };
+    </script>
+    <!-- end -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script src="/static/script.js"></script>
+  </body>
+</html>

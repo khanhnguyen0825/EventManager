@@ -1,0 +1,70 @@
+body {
+  background-image: url("https://images.unsplash.com/photo-1511795409834-ef04bbd61622?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8ZXZlbnQlMjBwbGFubmluZ3xlbnwwfHwwfHx8MA%3D%3D");
+  background-size: cover;
+  background-position: center center;
+  background-attachment: fixed;
+  background-color: #f8f9fa;
+}
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.login-box {
+  border: 1px solid #ddd;
+  padding: 30px;
+  border-radius: 10px;
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+}
+
+.navbar a {
+  color: white !important;
+}
+
+table.table-bordered {
+  border: 1px solid black;
+}
+
+table.table-bordered > thead > tr > th {
+  border: 1px solid black;
+}
+
+table.table-bordered > tbody > tr > td {
+  border: 1px solid black;
+}
+
+.align-center {
+  text-align: center;
+}
+
+.dashboard_card_border {
+  border: 1px solid black;
+  box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 0.05);
+}
+
+.page_background {
+  background-color: #d4cfcfda;
+  border: 1px solid black;
+  border-radius: 6px;
+  box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 0.07);
+}
+
+.card-hover:hover {
+  background: #f1f0ed;
+  cursor: pointer;
+}
+
+.border-button {
+  border: 0.5px solid rgb(73, 72, 72);
+}
+
+textarea {
+  overflow-y: hidden;
+  resize: none;
+}

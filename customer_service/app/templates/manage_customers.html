@@ -1,0 +1,83 @@
+{% extends 'base.html' %} {% block content %}
+<div class="container mt-4 p-4 page_background">
+  <h3 class="text-center text-primary">Danh sách khách hàng</h3>
+  <a href="/customers/add" class="btn btn-success mb-3 border-button"
+    ><i class="fas fa-plus"></i> &nbsp;Thêm khách hàng mới</a
+  >
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Tên</th>
+        <th>Email</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for customer in customers %}
+      <tr>
+        <td>{{ customer.name }}</td>
+        <td>{{ customer.email }}</td>
+        <td class="align-center">
+          <a
+            href="/customers/edit/{{ customer.id }}"
+            class="btn btn-info btn-sm border-button"
+            ><i class="fas fa-eye"></i> &nbsp;Chỉnh sửa thông tin chi tiết</a
+          >
+          <button
+            class="btn btn-danger btn-sm border-button"
+            data-toggle="modal"
+            data-target="#deleteModal{{ customer.id }}"
+          >
+            <i class="fas fa-trash"></i> &nbsp;Xóa
+          </button>
+
+          <!-- Modal Xác nhận xóa -->
+          <div
+            class="modal fade"
+            id="deleteModal{{ customer.id }}"
+            tabindex="-1"
+            role="dialog"
+            aria-labelledby="exampleModalLabel"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="pt-2">
+                  <h5 id="exampleModalLabel">Xác nhận xóa</h5>
+                </div>
+                <div class="modal-body">
+                  Bạn có chắc chắn muốn xóa {{ customer.name }}? Lưu ý khi bạn
+                  xoá khách hàng, bạn cũng xoá luôn tất cả các sự kiện của khách
+                  hàng đó.
+                </div>
+                <div class="modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-secondary border-button"
+                    data-dismiss="modal"
+                  >
+                    Hủy
+                  </button>
+                  <form
+                    method="POST"
+                    action="/customers/delete/{{ customer.id }}"
+                  >
+                    <button type="submit" class="btn btn-danger border-button">
+                      Xóa
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <a href="./dashboard?admin=true" class="btn btn-secondary mt-3 border-button">
+    <i class="fa fa-arrow-left"></i> &nbsp;Quay lại trang quản lý</a
+  >
+</div>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'base.html' %} {% block content %}
+<div class="container mt-4 p-4 page_background">
+  <h3 class="text-center text-primary">Danh sách vé đã đặt</h3>
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>Sự kiện</th>
+        <th>Người đặt vé</th>
+        <th>Email</th>
+        <th>Số điện thoại</th>
+        <th>Mã vé</th>
+        <th>Thời gian đặt</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for ticket in tickets %}
+      <tr>
+        <td>{{ ticket.event_name }}</td>
+        <td>{{ ticket.customer_name }}</td>
+        <td>{{ ticket.customer_email }}</td>
+        <td>{{ ticket.customer_phone }}</td>
+        <td>{{ ticket.ticket_code }}</td>
+        <td>{{ ticket.booked_at or '' }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}
