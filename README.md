@@ -1,4 +1,10 @@
-** Run each service individually**
+**Option A: Run all services at once (Windows)**
+
+```bash
+run_all_services.bat
+```
+
+**Option B: Run each service individually**
 
 ```bash
 # Terminal 1 - Auth Service
